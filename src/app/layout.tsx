@@ -6,7 +6,6 @@ import "./globals.scss";
 import ConfigureAmplify from '@/components/ConfigureAmplify';
 import Providers from '@/components/ContextProviders';
 
-// import TopNavBar from '@/components/TopNavBar';
 import ClientLayout from '@/components/ClientLayout';
 
 const geistSans = localFont({
@@ -21,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Agents4Energy - Sample",
-  description: "Use AI to improve energy operations",
+  title: "UGI AI Operations Assistant",
+  description: "AI-powered assistants for UGI Utilities operations - natural gas and electric utility management",
 };
 
 export default function RootLayout({
@@ -40,9 +39,6 @@ export default function RootLayout({
           <ClientLayout>
             {children}
           </ClientLayout>
-          {/* <TopNavBar/>
-          <Toolbar />
-          {children} */}
         </Providers>
       </body>
     </html>

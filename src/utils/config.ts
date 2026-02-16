@@ -1,4 +1,4 @@
-// import { BedrockAgent } from "@aws-sdk/client-bedrock-agent"
+// UGI-specific agent configuration
 import outputs from '@/../amplify_outputs.json';
 
 type BaseAgent = {
@@ -19,56 +19,55 @@ export type LangGraphAgent = BaseAgent & {
 }
 
 export const defaultAgents: { [key: string]: BaseAgent | BedrockAgent | LangGraphAgent } = {
-    PlanAndExecuteAgent: {
-        name: `Production Agent`,
+    UGIOperationsAgent: {
+        name: `UGI Operations Agent`,
         source: `graphql`,
         samplePrompts: [
-            `This morning well with API number 30-045-29202 stopped producing gas with indication of a hole in tubing.  
-            Make a table of all operational events found in the well files. 
-            Query all historic monthly production rates and make a plot with both the event and production data. 
-            Estimate the value of the well's remaining production. 
-            Write a procedure to repair the well, estimate the cost of the repair, and calculate financial metrics. 
-            Make an executive report about repairing the well with detailed cost and procedure data. 
-            Use the ai role for all steps.
-            `.replace(/^\s+/gm, ''),
-            `Search the well files for the well with API number 30-045-29202 to make a table with type of operation (drilling, completion, workover, plugging, other), text from the report describing operational details, and document title.
-            Also execute a sql query to get the total monthly oil, gas and water production from this well.
-            Create a plot with both the event data and the production data. `.replace(/^\s+/gm, ''), //This trims the white space at the start of each line
-            `Plot the total monthly oil, gas, and water production since 1900 for the well with API number 30-045-29202`,
-            `Which form of artifical lift best matches my personality?`
+            `Show me all natural gas pipeline maintenance activities in Luzerne County for the past 30 days.`,
+            `What is the average response time for electric outages across our Pennsylvania service territory?`,
+            `Analyze natural gas consumption patterns for residential customers in our Maryland service area.`,
+            `Generate a report on pipeline integrity inspections due in the next quarter.`,
+            `What are the current operational metrics for our natural gas distribution system?`
         ]
     },
-    MaintenanceAgent: {
-        name: "Maintenance Agent",
+    UGIAssetManagementAgent: {
+        name: "UGI Asset Management Agent",
         source: "bedrockAgent",
         agentId: outputs.custom.maintenanceAgentId,
         agentAliasId: outputs.custom.maintenanceAgentAliasId,
         samplePrompts: [
-            "How many tanks are in my biodiesel unit?",
-            "In September 2024, what are a few key incidents and actions taken at the biodiesel unit?",
+            "How many natural gas compressor stations require maintenance this month?",
+            "Show me all electric substations with pending inspection work orders.",
+            "What is the maintenance schedule for our pipeline network in the next 90 days?",
+            "List all equipment that has exceeded its recommended service interval.",
+            "Generate a preventive maintenance report for our electric distribution infrastructure.",
+            "Which maintenance crews have the best completion rates for pipeline work?"
         ],
     } as BedrockAgent,
-    RegulatoryAgent: {
-        name: "Regulatory Agent",
+    UGISafetyComplianceAgent: {
+        name: "UGI Safety & Compliance Agent",
         source: "bedrockAgent",
         agentId: outputs.custom.regulatoryAgentId,
         agentAliasId: outputs.custom.regulatoryAgentAliasId,
         samplePrompts: [
-            "What are the requirements for fugitive emissions monitoring and reporting in the U.S.?",
-            "What are the requirements for decomissioning an offshore oil well in Brazil?",
+            "What are the current Pennsylvania PUC requirements for natural gas pipeline inspections?",
+            "Show me our compliance status for electric utility safety regulations.",
+            "What are the reporting requirements for natural gas leak detection in Pennsylvania?",
+            "Generate a summary of recent safety incidents and corrective actions taken.",
+            "What are the federal requirements for pipeline integrity management?"
         ],
     } as BedrockAgent,
-    PetrophysicsAgent: {
-        name: "Petrophysics Agent",
+    UGICustomerServiceAgent: {
+        name: "UGI Customer Service Agent",
         source: "bedrockAgent",
         agentId: outputs.custom.petrophysicsAgentId,
         agentAliasId: outputs.custom.petrophysicsAgentAliasId,
         samplePrompts: [
-            "Give me a summary fluid substitution modeling",
-            "Give me the inputs of Gassmann equation",
-            "What are AVO classes?",
-            "Calculate the intercept and gradient value of the wet sandstone with vp=3.5 km/s, vs=1.95 km/s, bulk density=2.23 gm/cc when it is overlain by a shale? Determine the AVO class.",
-            "A wet sandstone has vp=3.5 km/s, vs=1.95 km/s, bulk density=2.23 gm/cc. What are the expected seismic velocities of the sandstone if the desired ﬂuid saturation is 80% oil? Use standard assumptions."
-            ],
+            "How many customer service requests were received in the past week?",
+            "What are the most common customer inquiries about natural gas service?",
+            "Show me the average resolution time for electric outage reports.",
+            "Generate a report on customer satisfaction metrics for our service territory.",
+            "What percentage of customers are enrolled in budget billing programs?"
+        ],
     } as BedrockAgent
 }
