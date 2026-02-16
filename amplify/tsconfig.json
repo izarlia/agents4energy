@@ -19,7 +19,9 @@
   "include": [
     "**/*",
     "../.amplify/generated/**/*",
-    "../src/utils/**/*"
+    "../src/utils/types.ts",
+    "../src/utils/rateLimiter.ts",
+    "../src/utils/amplify-utils.ts"
   ],
   "exclude": [
     "node_modules"
